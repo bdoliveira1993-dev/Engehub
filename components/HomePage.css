@@ -1,0 +1,456 @@
+/*
+ * EngeHub Landing v3 — editorial-minimal
+ * Doc: docs/superpowers/specs/2026-04-25-landing-home-v3-editorial-minimal.md
+ * Consome tokens de tokens.css. Sem hex hard-coded.
+ */
+
+/*
+ * Pinta body de dark enquanto a home está montada. Quando a usuária navega
+ * para /login, /dashboard, etc., .home-shell desmonta e o body volta ao
+ * bg-slate-50 default (definido no class do <body> em index.html via Tailwind).
+ */
+body:has(.home-shell) {
+  background: var(--surface-base);
+  color: var(--text-primary);
+}
+
+/* Escopo isolado: tudo fica sob .home-shell para não vazar pro resto do app. */
+.home-shell {
+  position: relative;
+  min-height: 100vh;
+  background: var(--surface-base);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+.home-shell * { box-sizing: border-box; }
+.home-shell button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+.home-shell a { color: inherit; text-decoration: none; }
+
+/* ---------- glow ambiente (top-left) ---------- */
+.home-shell .glow {
+  position: fixed;
+  top: -240px;
+  left: -240px;
+  width: 720px;
+  height: 720px;
+  background: var(--glow-accent);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(8px);
+}
+
+/* ---------- container ---------- */
+.home-shell .wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 var(--space-10);
+  position: relative;
+  z-index: 1;
+}
+@media (max-width: 720px) {
+  .home-shell .wrap {
+    padding: 0 var(--space-6);
+  }
+}
+
+/* ---------- nav ---------- */
+.home-shell .nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(12, 12, 13, 0.7);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.home-shell .nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+}
+.home-shell .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  font-size: 16px;
+}
+.home-shell .brand-mark {
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--text-faint);
+  color: var(--accent);
+}
+.home-shell .brand-dot {
+  color: var(--accent);
+}
+
+.home-shell .nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+.home-shell .nav-link {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  transition: color var(--motion-fast) var(--ease-out);
+  background: none;
+  border: 0;
+  padding: 0;
+  font-family: inherit;
+  cursor: pointer;
+}
+.home-shell .nav-link:hover {
+  color: var(--text-primary);
+}
+
+.home-shell .nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 9px 16px;
+  font-size: var(--text-sm);
+  color: var(--surface-base);
+  background: var(--text-primary);
+  border-radius: var(--radius-pill);
+  border: 0;
+  white-space: nowrap;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background var(--motion-fast) var(--ease-out),
+    color var(--motion-fast) var(--ease-out);
+}
+.home-shell .nav-cta:hover {
+  background: var(--accent);
+  color: var(--surface-base);
+}
+
+@media (max-width: 720px) {
+  .home-shell .nav-links {
+    gap: var(--space-4);
+  }
+  .home-shell .nav-link.hide-sm {
+    display: none;
+  }
+}
+
+/* ---------- buttons ---------- */
+.home-shell .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: 14px 22px;
+  font-size: var(--text-base);
+  font-weight: 500;
+  font-family: inherit;
+  color: var(--text-primary);
+  border: 1px solid var(--border-default);
+  background: transparent;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color var(--motion-base) var(--ease-out),
+    background var(--motion-base) var(--ease-out),
+    color var(--motion-base) var(--ease-out);
+}
+.home-shell .btn:hover {
+  border-color: var(--border-strong);
+  background: var(--surface-overlay);
+}
+.home-shell .btn-primary {
+  background: var(--text-primary);
+  color: var(--surface-base);
+  border-color: var(--text-primary);
+  font-weight: 500;
+}
+.home-shell .btn-primary:hover {
+  background: var(--accent);
+  color: var(--surface-base);
+  border-color: var(--accent);
+}
+.home-shell .btn .arr {
+  display: inline-block;
+  transition: transform var(--motion-base) var(--ease-out);
+}
+.home-shell .btn:hover .arr {
+  transform: translateX(4px);
+}
+
+/* ---------- hero ---------- */
+.home-shell .hero {
+  padding: 140px 0 160px;
+  position: relative;
+}
+@media (max-width: 720px) {
+  .home-shell .hero {
+    padding: 80px 0 100px;
+  }
+}
+
+.home-shell .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  letter-spacing: 0.02em;
+}
+.home-shell .eyebrow::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(122, 162, 255, 0.12);
+}
+
+.home-shell .hero h1 {
+  margin: 28px 0 0;
+  font-size: clamp(48px, 7vw, 104px);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  font-weight: 500;
+  max-width: 16ch;
+  text-wrap: balance;
+  color: var(--text-primary);
+  padding-bottom: 0.08em;
+}
+
+.home-shell .hero-lede {
+  margin-top: var(--space-8);
+  font-size: var(--text-lg);
+  line-height: 1.55;
+  color: var(--text-secondary);
+  max-width: 48ch;
+  text-wrap: pretty;
+  font-weight: 400;
+}
+
+.home-shell .hero-ctas {
+  margin-top: 44px;
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.home-shell .hero-foot {
+  margin-top: var(--space-16);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.home-shell .hero-foot::before {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: var(--text-faint);
+}
+
+/* ---------- sections ---------- */
+.home-shell .section {
+  padding: 120px 0;
+  position: relative;
+}
+@media (max-width: 720px) {
+  .home-shell .section {
+    padding: 80px 0;
+  }
+}
+
+.home-shell .features-head {
+  max-width: 1180px;
+  margin: 0 auto 72px;
+  text-align: center;
+}
+.home-shell .features-title {
+  margin: 0;
+  font-size: clamp(28px, 3.4vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  text-wrap: nowrap;
+}
+@media (max-width: 860px) {
+  .home-shell .features-title {
+    white-space: normal;
+    text-wrap: balance;
+    font-size: clamp(24px, 5vw, 34px);
+  }
+}
+
+.home-shell .section-kicker {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  letter-spacing: 0.02em;
+}
+
+/* ---------- features ---------- */
+.home-shell .features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--border-subtle);
+  border: 1px solid var(--border-subtle);
+}
+@media (max-width: 720px) {
+  .home-shell .features {
+    grid-template-columns: 1fr;
+  }
+}
+
+.home-shell .feature {
+  background: var(--surface-base);
+  padding: var(--space-10) 36px;
+  transition: background var(--motion-base) var(--ease-out);
+  display: flex;
+  flex-direction: column;
+  min-height: 260px;
+  position: relative;
+}
+.home-shell .feature:hover {
+  background: var(--surface-raised);
+}
+.home-shell .feature-num {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-faint);
+  letter-spacing: 0.02em;
+}
+.home-shell .feature h3 {
+  margin: 20px 0 0;
+  font-size: var(--text-xl);
+  letter-spacing: -0.015em;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+.home-shell .feature p {
+  margin: 14px 0 0;
+  color: var(--text-secondary);
+  font-size: var(--text-base);
+  line-height: 1.55;
+  text-wrap: pretty;
+  max-width: 42ch;
+}
+.home-shell .feature-link {
+  margin-top: auto;
+  padding-top: var(--space-8);
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  transition: color var(--motion-base) var(--ease-out);
+}
+.home-shell .feature:hover .feature-link {
+  color: var(--accent);
+}
+.home-shell .feature-link .arr {
+  display: inline-block;
+  transition: transform var(--motion-base) var(--ease-out);
+}
+.home-shell .feature:hover .feature-link .arr {
+  transform: translateX(4px);
+}
+
+/* ---------- cta ---------- */
+.home-shell .cta {
+  padding: 120px 0 140px;
+  text-align: left;
+}
+.home-shell .cta h2 {
+  font-size: clamp(40px, 5.2vw, 72px);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  font-weight: 500;
+  max-width: 14ch;
+  text-wrap: balance;
+  margin: 0;
+  color: var(--text-primary);
+}
+.home-shell .cta p {
+  margin: var(--space-6) 0 0;
+  color: var(--text-secondary);
+  font-size: var(--text-md);
+  line-height: 1.55;
+  max-width: 48ch;
+}
+.home-shell .cta-actions {
+  margin-top: var(--space-10);
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+.home-shell .cta-note {
+  margin-top: var(--space-5);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+}
+
+/* ---------- footer ---------- */
+.home-shell .footer {
+  padding: var(--space-12) 0;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 13px;
+  color: var(--text-tertiary);
+}
+.home-shell .footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+.home-shell .footer .brand {
+  font-size: var(--text-sm);
+}
+.home-shell .footer-links {
+  display: flex;
+  gap: var(--space-6);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+.home-shell .footer-links a {
+  transition: color var(--motion-fast) var(--ease-out);
+}
+.home-shell .footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* ---------- reveal-on-scroll ---------- */
+.home-shell .reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity var(--motion-reveal) var(--ease-out),
+    transform var(--motion-reveal) var(--ease-out);
+}
+.home-shell .reveal.in {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-shell .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

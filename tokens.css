@@ -1,0 +1,150 @@
+/*
+ * EngeHub Design System — Tokens
+ * Fonte única da verdade para todas as telas.
+ * Doc canônico: docs/design-system.md
+ * Versão: 1.0 (2026-04-25)
+ */
+
+:root {
+  /* ---------- superfícies (3 níveis) ---------- */
+  --surface-base:    #0c0c0d;
+  --surface-raised:  #111113;
+  --surface-overlay: #16161a;
+
+  /* ---------- bordas (alpha-on-white) ---------- */
+  --border-subtle:  rgba(255, 255, 255, 0.04);
+  --border-default: rgba(255, 255, 255, 0.10);
+  --border-strong:  rgba(255, 255, 255, 0.18);
+
+  /* ---------- texto (4 níveis) ---------- */
+  --text-primary:   #f2f2f3;
+  --text-secondary: #9a9aa3;
+  --text-tertiary:  #6a6a74;
+  --text-faint:     #43434c;
+
+  /* ---------- marca ---------- */
+  --accent:        #7aa2ff;   /* lavanda-azul, default */
+  --accent-strong: #3b82f6;   /* uso secundário (focus forte, links inline) */
+  --accent-warm:   #e8e0d0;   /* italic-serif emphasis em headlines (NUNCA usar em UI) */
+
+  /* ---------- status (cores semânticas, fora de marca) ---------- */
+  --status-success: #22c55e;
+  --status-warning: #f59e0b;
+  --status-danger:  #ef4444;
+  --status-info:    #3b82f6;
+
+  /* ---------- tipografia — famílias ---------- */
+  --font-sans:  "Inter Tight", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --font-mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* ---------- tipografia — escala (UI/corpo) ---------- */
+  --text-xs:   12px;
+  --text-sm:   14px;
+  --text-base: 15px;
+  --text-md:   17px;
+  --text-lg:   19px;
+  --text-xl:   22px;
+  --text-2xl:  28px;
+  /* headlines grandes (h1, h2 de hero/cta) usam clamp() inline em cada componente */
+
+  /* ---------- espaçamento (escala 4px) ---------- */
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:   12px;
+  --space-4:   16px;
+  --space-5:   20px;
+  --space-6:   24px;
+  --space-8:   32px;
+  --space-10:  40px;
+  --space-12:  48px;
+  --space-16:  64px;
+  --space-20:  80px;
+  --space-24:  96px;
+  --space-32:  128px;
+
+  /* ---------- raios ---------- */
+  --radius-none: 0;
+  --radius-sm:   2px;
+  --radius-pill: 999px;
+
+  /* ---------- motion ---------- */
+  --motion-fast:   120ms;
+  --motion-base:   200ms;
+  --motion-slow:   320ms;
+  --motion-reveal: 700ms;
+
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ---------- efeitos ---------- */
+  --glow-accent: radial-gradient(closest-side, rgba(122, 162, 255, 0.10), transparent 70%);
+
+  /* ---------- focus ring (default global) ---------- */
+  --focus-ring: 1px solid var(--accent);
+  --focus-ring-offset: 3px;
+}
+
+/* ---------- foco visível padrão ---------- */
+:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* ---------- utilitárias globais (mono, serif, italic-serif emphasis) ---------- */
+.mono {
+  font-family: var(--font-mono);
+}
+
+.serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+}
+
+/*
+ * Italic-serif emphasis — assinatura visual do EngeHub.
+ * Aplicar em UMA palavra-chave por headline.
+ * Ver docs/design-system.md §3.4
+ */
+.s {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent-warm);
+  letter-spacing: -0.02em;
+}
+
+/* ---------- prefers-reduced-motion (default global) ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- seleção ---------- */
+::selection {
+  background: var(--accent);
+  color: var(--surface-base);
+}
+
+/* ---------- scrollbar (webkit) ---------- */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--surface-base);
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2a32;
+  border: 2px solid var(--surface-base);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #34343d;
+}
